@@ -20,7 +20,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func doneButtonTapped(_ sender: UIButton) {
+        textField.resignFirstResponder()
         
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     func setup() {
@@ -30,6 +35,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         textField.borderStyle = .roundedRect
         textField.clearButtonMode = .whileEditing
         textField.returnKeyType = .go
+        
+        textField.becomeFirstResponder()
     }
     
     // 텍스트필드의 입력을 시작할때 호출됨 -> 시작할지말지에 대한 여부를 허락
@@ -49,8 +56,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // 텍스트필드의 글자 내용이 한글자씩 입력되거나 지워질때 호출되고 편집상태를 부여할 수 있음
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print(string)
-        return true
+        let maxLength = 10
+        let currentString: NSString = (textField.text ?? "") as NSString
+        let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
+                                    
     }
     
     
