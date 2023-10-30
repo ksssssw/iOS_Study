@@ -26,6 +26,7 @@
 		303A32362AECE3BE00A9BE51 /* HikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A32322AECE3BE00A9BE51 /* HikeView.swift */; };
 		303A32382AEF7C5300A9BE51 /* CategoryHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A32372AEF7C5300A9BE51 /* CategoryHome.swift */; };
 		303A323A2AEF7F6300A9BE51 /* CategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A32392AEF7F6300A9BE51 /* CategoryRow.swift */; };
+		3094963B2AEF814000F029C5 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3094963A2AEF814000F029C5 /* CategoryItem.swift */; };
 		30EF0A0A2AEA09CB00FF7F0C /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 30EF09FC2AEA09CA00FF7F0C /* LICENSE.txt */; };
 		30EF0A0B2AEA09CB00FF7F0C /* umbagog@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30EF09FE2AEA09CA00FF7F0C /* umbagog@2x.jpg */; };
 		30EF0A0C2AEA09CB00FF7F0C /* twinlake@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30EF09FF2AEA09CA00FF7F0C /* twinlake@2x.jpg */; };
@@ -68,6 +69,7 @@
 		303A32322AECE3BE00A9BE51 /* HikeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HikeView.swift; sourceTree = "<group>"; };
 		303A32372AEF7C5300A9BE51 /* CategoryHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHome.swift; sourceTree = "<group>"; };
 		303A32392AEF7F6300A9BE51 /* CategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRow.swift; sourceTree = "<group>"; };
+		3094963A2AEF814000F029C5 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		30EF09FC2AEA09CA00FF7F0C /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		30EF09FE2AEA09CA00FF7F0C /* umbagog@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "umbagog@2x.jpg"; sourceTree = "<group>"; };
 		30EF09FF2AEA09CA00FF7F0C /* twinlake@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "twinlake@2x.jpg"; sourceTree = "<group>"; };
@@ -221,12 +223,13 @@
 			isa = PBXGroup;
 			children = (
 				303A322E2AECE3BE00A9BE51 /* Hikes */,
-				30348B0D2AE8FACB00F93A85 /* ContentView.swift */,
 				303A32152AECCCA800A9BE51 /* Helpers */,
 				3027C79B2AEA5DCC0047E08F /* Landmarks */,
 				303A32202AECDECF00A9BE51 /* Badges */,
 				303A32372AEF7C5300A9BE51 /* CategoryHome.swift */,
 				303A32392AEF7F6300A9BE51 /* CategoryRow.swift */,
+				3094963A2AEF814000F029C5 /* CategoryItem.swift */,
+				30348B0D2AE8FACB00F93A85 /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				303A32332AECE3BE00A9BE51 /* GraphCapsule.swift in Sources */,
 				30348B0C2AE8FACB00F93A85 /* LandmarksApp.swift in Sources */,
 				303A321D2AECDD3400A9BE51 /* RotatedBadgeeSymbol.swift in Sources */,
+				3094963B2AEF814000F029C5 /* CategoryItem.swift in Sources */,
 				303A32352AECE3BE00A9BE51 /* HikeDetail.swift in Sources */,
 				30EF0A252AEA56EE00FF7F0C /* FavoriteButton.swift in Sources */,
 				303A322D2AECE2E600A9BE51 /* Hike.swift in Sources */,
