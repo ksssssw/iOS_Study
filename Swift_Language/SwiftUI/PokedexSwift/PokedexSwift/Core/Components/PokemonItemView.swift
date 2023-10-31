@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PokemonItemView: View {
-    var pokemon: PokemonEntity
+    var pokemon: PokemonModel
     
     var body: some View {
         ZStack {
@@ -16,7 +16,7 @@ struct PokemonItemView: View {
                 .fill(.clear)
                 .stroke(.black, style: .init())
             VStack {
-                AsyncImage(url: URL(string: pokemon.imageURL)) { image in
+                AsyncImage(url: pokemon.imageURL) { image in
                     image
                         .image?
                         .resizable()
