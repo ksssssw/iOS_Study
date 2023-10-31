@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 class PokemonExploreViewModel: ObservableObject {
-    private let getPokemonListUseCase: GetPokemonListUseCase = GetPokemonListUseCase(pokeDexRepository: PokeDexRepository.shared)
+    private let getPokemonListUseCase: GetPokemonListUseCase = GetPokemonListUseCase(exploreRepository: ExploreRepository.shared)
     
     @Published var pokemonList: [PokemonModel] = [PokemonModel]()
     @Published var offset: Int = 20

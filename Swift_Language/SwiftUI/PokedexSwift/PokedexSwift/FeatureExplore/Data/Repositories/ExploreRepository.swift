@@ -7,14 +7,14 @@
 
 import Foundation
 
-class PokeDexRepository: PokeDexRepositoryProtocol {
-    static let shared = PokeDexRepository()
+class ExploreRepository: ExploreRepositoryProtocol {
+    static let shared = ExploreRepository()
     
-    private let pokeDexDataSources = PokeDexDataSource()
+    private let exploreDataSources = ExploreDataSource()
     
     
     func fetchPokemons(limit: Int, offset: Int) async throws -> [PokemonEntity] {
-        let pokemonsListResponse = try await pokeDexDataSources.fetchPokemons(limit: limit, offset: offset)
+        let pokemonsListResponse: PokemonListResponseModel = try await exploreDataSources.fetchPokemons(limit: limit, offset: offset)
         let pokemonResponses: [PokemonResponseModel] = pokemonsListResponse.results
         let pokemonEntities: [PokemonEntity] = pokemonResponses.compactMap { pokemon in
             return PokemonEntity(pokemonResponse: pokemon)

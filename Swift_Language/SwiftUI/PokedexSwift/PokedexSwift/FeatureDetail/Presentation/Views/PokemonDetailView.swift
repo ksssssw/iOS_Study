@@ -2,41 +2,42 @@
 //  PokemonDetailView.swift
 //  PokedexSwift
 //
-//  Created by 1000288 on 2023/10/31.
+//  Created by SeokWonKang on 10/31/23.
 //
 
 import SwiftUI
 
 struct PokemonDetailView: View {
     var id: Int
-    @State private var pokemonDetail: PokemonDetailEntity?
+    
+    @StateObject private var viewModel: PokemonDetailViewModel = PokemonDetailViewModel()
     
     var body: some View {
         VStack {
-            if pokemonDetail == nil {
+            if viewModel.pokemonDetail == nil {
                 Text("Loading...")
             } else {
-                AsyncImage(url: URL(string: pokemonDetail?.pokemon.imageURL ?? "")) { image in
+                AsyncImage(url: viewModel.pokemonDetail?.pokemon.imageURL) { image in
                     image
                         .image?
                         .resizable()
                 }
                 .scaledToFit()
                 
-                Text(pokemonDetail?.pokemon.name ?? "")
+                Text(viewModel.pokemonDetail?.pokemon.name ?? "")
                     .font(.title)
                 
                 Spacer()
                 
                 HStack {
                     VStack {
-                        Text("\(pokemonDetail?.weight ?? 0) KG")
+                        Text("\(viewModel.pokemonDetail?.weight ?? 0) KG")
                             .font(.title3)
                         Text("Height")
                             .font(.subheadline)
                     }
                     VStack {
-                        Text("\(pokemonDetail?.height ?? 0) M")
+                        Text("\(viewModel.pokemonDetail?.height ?? 0) M")
                             .font(.title3)
                         Text("Height")
                             .font(.subheadline)
@@ -52,46 +53,34 @@ struct PokemonDetailView: View {
                     HStack {
                         Text("HP")
                             .font(.headline)
-                        Text("\(pokemonDetail?.stats[0].base_stat ?? 0)")
+                        Text("\(viewModel.pokemonDetail?.stats[0].base_stat ?? 0)")
                     }
                     HStack {
                         Text("ATK")
                             .font(.headline)
-                        Text("\(pokemonDetail?.stats[1].base_stat ?? 0)")
+                        Text("\(viewModel.pokemonDetail?.stats[1].base_stat ?? 0)")
                     }
                     HStack {
                         Text("DEF")
                             .font(.headline)
-                        Text("\(pokemonDetail?.stats[2].base_stat ?? 0)")
+                        Text("\(viewModel.pokemonDetail?.stats[2].base_stat ?? 0)")
                     }
                     HStack {
                         Text("SPA")
                             .font(.headline)
-                        Text("\(pokemonDetail?.stats[3].base_stat ?? 0)")
+                        Text("\(viewModel.pokemonDetail?.stats[3].base_stat ?? 0)")
                     }
                     HStack {
                         Text("SPD")
                             .font(.headline)
-                        Text("\(pokemonDetail?.stats[4].base_stat ?? 0)")
+                        Text("\(viewModel.pokemonDetail?.stats[4].base_stat ?? 0)")
                     }
                     
                 }
             }
         }
         .task {
-            loadDetail(id: id)
-        }
-    }
-    
-    func loadDetail(id: Int) {
-        Task {
-            do {
-                let getPokemonDetailUseCase = GetPokemonDetailUseCase(repository: DetailRepository.shared)
-                
-                self.pokemonDetail = try await getPokemonDetailUseCase.execute(id: id)
-            } catch {
-                print("Error:\(error)")
-            }
+            viewModel.loadDetail(id: id)
         }
     }
 }
