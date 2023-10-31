@@ -44,8 +44,6 @@ struct PokemonExploreView: View {
                 pokemonList += newPokemonList
                 
                 offset += newPokemonList.count
-                
-                print(pokemonList)
             } catch {
                 print("Error occurred: \(error)")
             }
