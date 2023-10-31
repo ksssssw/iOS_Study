@@ -22,6 +22,4 @@ class PokeDexRepository: PokeDexRepositoryProtocol {
         
         return pokemonEntities
     }
-    
-    
 }

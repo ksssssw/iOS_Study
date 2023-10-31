@@ -24,5 +24,9 @@ struct PokemonEntity: Hashable {
         self.imageURL = Constants.APIEndpoint.getPokemonImage(id: id).url?.absoluteString ?? ""
     }
     
-//    init?(pokemonDetailResponse: PokemonDetail)
+    init?(pokemonDetailResponse: PokemonDetailResponseModel) {
+        self.id = pokemonDetailResponse.id
+        self.name = pokemonDetailResponse.name
+        self.imageURL = Constants.APIEndpoint.getPokemonImage(id: id).url?.absoluteString ?? ""
+    }
 }

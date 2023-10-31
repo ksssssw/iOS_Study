@@ -11,20 +11,28 @@ struct PokemonListView: View {
     var pokemon: PokemonEntity
 
     var body: some View {
-        HStack {
-            AsyncImage(url: URL(string: pokemon.imageURL)) { image in
-                image
-                    .image?
-                    .resizable()
+        ZStack {
+            RoundedRectangle(cornerRadius: 18)
+                .fill(.clear)
+                .stroke(.black, style: .init())
+            VStack {
+                AsyncImage(url: URL(string: pokemon.imageURL)) { image in
+                    image
+                        .image?
+                        .resizable()
+                }
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+                
+                Text(pokemon.name)
+                
+                Spacer()
             }
-            .scaledToFit()
-            .frame(width: 100, height: 100)
-
-            Text(pokemon.name)
         }
+        .padding(5)
     }
 }
 
 //#Preview {
-//    PokemonListView()
+//    PokemonListView(pokemon: PokemonEntity)
 //}

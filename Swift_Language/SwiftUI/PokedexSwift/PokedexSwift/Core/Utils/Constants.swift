@@ -17,6 +17,7 @@ struct Constants {
     enum APIEndpoint {
         case getPokemonList(limit: Int, offset: Int)
         case getPokemonImage(id: Int)
+        case getPokemonDetail(id: Int)
         
         var url: URL? {
             switch self {
@@ -24,6 +25,8 @@ struct Constants {
                 return URL(string: "\(pokeApiURL)pokemon?limit=\(limit)&offset=\(offset)")
             case .getPokemonImage(let id):
                 return URL(string: String(format: Constants.pokeApiArtworkURL, id))
+            case .getPokemonDetail(let id):
+                return URL(string: "\(pokeApiURL)pokemon/\(id)/")
             }
         }
     }

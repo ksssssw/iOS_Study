@@ -9,24 +9,31 @@ import SwiftUI
 
 struct PokemonExploreView: View {
     let getPokemonListUseCase = GetPokemonListUseCase(pokeDexRepository: PokeDexRepository.shared)
+    let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
     @State private var pokemonList: [PokemonEntity] = []
     @State private var offset: Int = 0
     let limit: Int = -0
     
     var body: some View {
-        List {
-            ForEach(pokemonList, id: \.self) { pokemon in
-                PokemonListView(pokemon: pokemon)
-                    .onAppear(perform: {
-                        if pokemonList.last == pokemon {
-                            loadMore()
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(pokemonList, id: \.self) { pokemon in
+                        NavigationLink(destination: PokemonDetailView(id: pokemon.id)) {
+                            PokemonListView(pokemon: pokemon)
+                                .onAppear(perform: {
+                                    if pokemonList.last == pokemon {
+                                        loadMore()
+                                    }
+                                })
                         }
-                    })
+                    }
+                }
+                .task {
+                    loadMore()
+                }
             }
-        }
-        .task {
-            loadMore()
         }
     }
     
@@ -37,6 +44,8 @@ struct PokemonExploreView: View {
                 pokemonList += newPokemonList
                 
                 offset += newPokemonList.count
+                
+                print(pokemonList)
             } catch {
                 print("Error occurred: \(error)")
             }
