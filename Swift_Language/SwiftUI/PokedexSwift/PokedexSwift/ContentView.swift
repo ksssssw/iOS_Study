@@ -7,9 +7,12 @@
 
 import SwiftUI
 
+// 이 데이터 모델은 엔티티와 UI 관련 정보를 혼합해서 사용중임
+// 클린아키텍처에서는 엔티티와 UI 종속성이 없어야 함
 struct Pokemon: Identifiable, Decodable {
     let id: Int
     let name: String
+    // 이미지 URL 생성과 같은 UI작업은 분리되어야 함 이 부분은 UI레이어나 ViewModel에서 수행될 수 있음
     var imageUrl: URL? {
         return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png")
     }
@@ -33,6 +36,8 @@ struct ContentView: View {
                 PokemonView(pokemon: pokemon)
             }
         }
+        // 뷰 내부에서 데이터를 직접 가져오는것은 클린아키텍처에서 위배됨
+        // 데이터 가져오는 작업은 ViewModel이나 사용 사례와 같은 별도의 레이어로 이동되어야 함
         .task {
             do {
                 pokemonList = try await getPokemonList()
@@ -42,6 +47,8 @@ struct ContentView: View {
         }
     }
     
+    // 이 함수는 1. 데이터를 가져오고 2. 파싱하고, 3. 데이터를 변환하는 작업이 모두 합쳐져 있음
+    // 이 문제는 단일 책임 원칙에 따라 분리되어야 함
     func getPokemonList() async throws -> [Pokemon] {
         guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=50") else {
             throw URLError(.badURL)
