@@ -12,7 +12,7 @@ class PokemonExploreViewModel: ObservableObject {
     private let getPokemonListUseCase: GetPokemonListUseCase = GetPokemonListUseCase(exploreRepository: ExploreRepository.shared)
     
     @Published var pokemonList: [PokemonModel] = [PokemonModel]()
-    @Published var offset: Int = 20
+    @Published var offset: Int = 0
     
     func handleOnAppear(pokemon: PokemonModel) {
         guard pokemonList.last == pokemon else { return }
@@ -24,7 +24,7 @@ class PokemonExploreViewModel: ObservableObject {
     func loadPokemonList() {
         Task {
             do {
-                let pokemonEntityList = try await getPokemonListUseCase.execute(limit: 20, offset: offset)
+                let pokemonEntityList = try await getPokemonListUseCase.execute(limit: -0, offset: offset)
                 pokemonList += pokemonEntityList.compactMap({ pokemon in PokemonModel(pokemon: pokemon) })
             } catch {
                 print(error.localizedDescription)
