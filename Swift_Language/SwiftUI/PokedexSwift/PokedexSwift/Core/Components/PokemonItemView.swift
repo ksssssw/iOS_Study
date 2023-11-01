@@ -16,7 +16,7 @@ struct PokemonItemView: View {
                 .fill(.clear)
                 .stroke(.black, style: .init())
             VStack {
-                AsyncImage(url: pokemon.imageURL) { image in
+                CacheAsyncImage(url: pokemon.imageURL!) { image in
                     image
                         .image?
                         .resizable()
