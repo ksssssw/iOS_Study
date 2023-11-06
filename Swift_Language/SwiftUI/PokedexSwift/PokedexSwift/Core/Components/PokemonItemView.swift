@@ -13,8 +13,10 @@ struct PokemonItemView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 18)
-                .fill(.clear)
-                .stroke(.black, style: .init())
+                .fill(Color(hex: 0xFBCEB1))
+                .frame(width: 170, height: 200)
+                .shadow(radius: 3)
+            
             VStack {
                 CacheAsyncImage(url: pokemon.imageURL!) { image in
                     image
@@ -22,17 +24,27 @@ struct PokemonItemView: View {
                         .resizable()
                 }
                 .scaledToFit()
-                .frame(width: 100, height: 100)
+                .frame(width: 130, height: 130)
                 
-                Text(pokemon.name)
-                
-                Spacer()
+                ZStack(alignment: .leading) {
+                    Text(pokemon.name)
+                        .font(.system(size: 18))
+                        .foregroundColor(.white)
+                        .bold()
+                }
             }
         }
-        .padding(5)
+//        .padding(
+//            EdgeInsets(
+//                top: 10,
+//                leading: 5,
+//                bottom: 5,
+//                trailing: 5
+//            )
+//        )
     }
 }
 
 //#Preview {
-//    PokemonItemView()
+//    PokemonItemView(pokemon: PokemonModel(pokemon: <#T##PokemonEntity#>))
 //}

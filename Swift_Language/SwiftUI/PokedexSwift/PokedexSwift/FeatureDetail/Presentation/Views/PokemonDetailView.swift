@@ -17,7 +17,7 @@ struct PokemonDetailView: View {
             if viewModel.pokemonDetail == nil {
                 Text("Loading...")
             } else {
-                AsyncImage(url: viewModel.pokemonDetail?.pokemon.imageURL) { image in
+                CacheAsyncImage(url: (viewModel.pokemonDetail?.pokemon.imageURL)!) { image in
                     image
                         .image?
                         .resizable()

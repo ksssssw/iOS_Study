@@ -8,29 +8,34 @@
 import SwiftUI
 
 struct PokemonExplorerView: View {
-    let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    let columns = [GridItem(.adaptive(minimum: 150), spacing: 20)]
     
     @StateObject private var viewModel: PokemonExploreViewModel = PokemonExploreViewModel()
     
-        var body: some View {
-            NavigationStack {
-                ScrollView {
-                    LazyVGrid(columns: columns) {
-                        ForEach(viewModel.pokemonList, id: \.self) { pokemon in
-                            NavigationLink(destination: PokemonDetailView(id: pokemon.id)) {
-                                PokemonListView(pokemon: pokemon)
-                                    .onAppear(perform: {
-                                        viewModel.handleOnAppear(pokemon: pokemon)
-                                    })
-                            }
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 20) {
+                    ForEach(viewModel.pokemonList, id: \.self) { pokemon in
+                        NavigationLink(destination: PokemonDetailView(id: pokemon.id)) {
+                            PokemonListView(pokemon: pokemon)
+                                .onAppear(perform: {
+                                    viewModel.handleOnAppear(pokemon: pokemon
+                                    )
+                                }
+                            )
                         }
                     }
-                    .task {
-                        viewModel.loadPokemonList()
-                    }
+                }
+                .padding()
+                .task {
+                    viewModel.loadPokemonList()
                 }
             }
+            .background(Color(hex: 0x222224))
+            .listStyle(PlainListStyle())
         }
+    }
 }
 
 #Preview {

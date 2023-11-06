@@ -49,14 +49,32 @@ struct CacheAsyncImage<Content>: View where Content: View {
 }
 
 fileprivate class ImageCache {
-    static var cache: [URL: Image] = [:]
-    
+    private static var cache: [URL: Image] = [:]
+    private static var recentURLs: [URL] = []
+
     static subscript(url: URL) -> Image? {
         get {
-            ImageCache.cache[url]
+            return cache[url]
         }
         set {
-            ImageCache.cache[url] = newValue
+            if let newImage = newValue {
+                cache[url] = newImage
+                // 새 URL을 배열의 끝에 추가 (가장 최근 사용됨)
+                recentURLs.append(url)
+                // 최대 캐시 크기를 설정 (원하는 크기로 조절)
+                let maxCacheSize = 100
+                // 최대 크기를 초과하면 오래된 항목을 제거
+                if recentURLs.count > maxCacheSize {
+                    if let removedURL = recentURLs.first {
+                        recentURLs.removeFirst()
+                        cache[removedURL] = nil
+                    }
+                }
+            } else {
+                // 이미지가 nil로 설정되면 해당 URL 제거
+                recentURLs.removeAll { $0 == url }
+                cache[url] = nil
+            }
         }
     }
 }
