@@ -23,7 +23,7 @@ struct PokemonExplorerView: View {
                                     viewModel.handleOnAppear(pokemon: pokemon
                                     )
                                 }
-                            )
+                                )
                         }
                     }
                 }
@@ -32,8 +32,23 @@ struct PokemonExplorerView: View {
                     viewModel.loadPokemonList()
                 }
             }
+            .offset(y: 60)
+            .overlay(
+                ZStack {
+                    Color.clear
+                        .background(Color(hex: 0xf00000))
+                    
+                    Text("PokeDex")
+                        .font(.largeTitle.weight(.bold))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
+                        .padding(.bottom, 20)
+                        .padding(.leading, 20)
+                }
+                    .frame(height: 50)
+                    .frame(maxHeight: .infinity, alignment: .top)
+            )
             .background(Color(hex: 0x222224))
-            .listStyle(PlainListStyle())
         }
     }
 }

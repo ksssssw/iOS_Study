@@ -34,14 +34,6 @@ struct PokemonItemView: View {
                 }
             }
         }
-//        .padding(
-//            EdgeInsets(
-//                top: 10,
-//                leading: 5,
-//                bottom: 5,
-//                trailing: 5
-//            )
-//        )
     }
 }
 
